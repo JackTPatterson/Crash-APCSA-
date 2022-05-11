@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APCSA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+   
+
+
+
+</head>
+
+<body style="background-color: #0d0d20" class="p-10 overflow-hidden">
+    <div class="flex space-x-10">
+        <div class="amt">
+            <div class="flex justify-between">
+                <h1 class="text-xl font-bold text-white mb-4">
+                    Current Amount:
+                </h1>
+                <div class="flex space-x-1">
+                    <svg class="h-4 w-4 mt-1.5" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 291.764 291.764"
+                        style="enable-background:new 0 0 291.764 291.764;" xml:space="preserve">
+                        <g>
+                            <path style="fill:#EFC75E;" d="M145.882,0c80.573,0,145.882,65.319,145.882,145.882s-65.31,145.882-145.882,145.882
+		S0,226.446,0,145.882S65.31,0,145.882,0z" />
+                            <path style="fill:#CC9933;" d="M145.882,27.353c-65.465,0-118.529,53.065-118.529,118.529s53.065,118.529,118.529,118.529
+		s118.529-53.065,118.529-118.529S211.347,27.353,145.882,27.353z M145.882,246.176c-55.39,0-100.294-44.904-100.294-100.294
+		S90.493,45.588,145.882,45.588s100.294,44.904,100.294,100.294S201.281,246.176,145.882,246.176z M158.009,138.269
+		c-5.452-2.289-25.493-5.452-25.493-14.214c0-6.464,7.495-8.334,11.99-8.334c4.094,0,8.999,1.295,11.589,3.875
+		c1.641,1.577,2.316,2.726,2.854,4.313c0.684,1.869,1.094,3.875,3.684,3.875h13.357c3.136,0,3.957-0.574,3.957-4.021
+		c0-14.789-11.589-23.122-24.809-25.994V86.28c0-2.58-0.821-4.167-3.957-4.167h-10.64c-3.136,0-3.957,1.577-3.957,4.167v11.051
+		c-14.178,2.726-26.031,11.634-26.031,27.718c0,18.235,12.683,23.979,26.441,28.566c11.589,3.884,23.724,4.021,23.724,12.063
+		s-5.99,9.765-13.357,9.765c-5.051,0-10.631-1.304-13.366-4.741c-1.769-2.152-2.453-4.021-2.58-5.89
+		c-0.274-3.592-1.769-4.021-4.914-4.021H113.28c-3.136,0-3.957,0.729-3.957,4.021c0,16.366,13.093,26.286,27.262,29.441v11.206
+		c0,2.58,0.821,4.167,3.957,4.167h10.64c3.136,0,3.957-1.586,3.957-4.167v-10.905c16.084-2.453,27.125-12.209,27.125-29.441
+		C182.28,145.591,167.829,141.424,158.009,138.269z" />
+                        </g>
+                    </svg>
+                    <h1 class="text-xl font-bold text-white" id="amt-span">
+                    </h1>
+                </div>
+            </div>
+            <div class="mx-auto space-y-4">
+                <div class="flex space-x-1">
+                    <div class="mg-white p-3 bg-white rounded-tl-lg rounded-bl-lg">
+                        <svg class="h-6 w-6" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 291.764 291.764"
+                            style="enable-background:new 0 0 291.764 291.764;" xml:space="preserve">
+                            <g>
+                                <path style="fill:#EFC75E;" d="M145.882,0c80.573,0,145.882,65.319,145.882,145.882s-65.31,145.882-145.882,145.882
+		S0,226.446,0,145.882S65.31,0,145.882,0z" />
+                                <path style="fill:#CC9933;" d="M145.882,27.353c-65.465,0-118.529,53.065-118.529,118.529s53.065,118.529,118.529,118.529
+		s118.529-53.065,118.529-118.529S211.347,27.353,145.882,27.353z M145.882,246.176c-55.39,0-100.294-44.904-100.294-100.294
+		S90.493,45.588,145.882,45.588s100.294,44.904,100.294,100.294S201.281,246.176,145.882,246.176z M158.009,138.269
+		c-5.452-2.289-25.493-5.452-25.493-14.214c0-6.464,7.495-8.334,11.99-8.334c4.094,0,8.999,1.295,11.589,3.875
+		c1.641,1.577,2.316,2.726,2.854,4.313c0.684,1.869,1.094,3.875,3.684,3.875h13.357c3.136,0,3.957-0.574,3.957-4.021
+		c0-14.789-11.589-23.122-24.809-25.994V86.28c0-2.58-0.821-4.167-3.957-4.167h-10.64c-3.136,0-3.957,1.577-3.957,4.167v11.051
+		c-14.178,2.726-26.031,11.634-26.031,27.718c0,18.235,12.683,23.979,26.441,28.566c11.589,3.884,23.724,4.021,23.724,12.063
+		s-5.99,9.765-13.357,9.765c-5.051,0-10.631-1.304-13.366-4.741c-1.769-2.152-2.453-4.021-2.58-5.89
+		c-0.274-3.592-1.769-4.021-4.914-4.021H113.28c-3.136,0-3.957,0.729-3.957,4.021c0,16.366,13.093,26.286,27.262,29.441v11.206
+		c0,2.58,0.821,4.167,3.957,4.167h10.64c3.136,0,3.957-1.586,3.957-4.167v-10.905c16.084-2.453,27.125-12.209,27.125-29.441
+		C182.28,145.591,167.829,141.424,158.009,138.269z" />
+                            </g>
+                        </svg>
+                    </div>
+
+                    <input id="buyinamt" class="bg-white p-3 rounded-tr-lg rounded-br-lg w-full" placeholder="Amount">
+                </div>
+                <div class="flex space-x-1">
+                    <div class="mg-white p-2.5 bg-white rounded-tl-lg rounded-bl-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-black" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+
+                    <input id="cashout" class="bg-white p-3 rounded-tr-lg rounded-br-lg w-full"
+                        placeholder="Auto Cashout">
+                </div>
+
+
+                <button id="play-btn" style="background-color: rgba(0, 191, 239, 1)"
+                    class="text-white font-bold p-3 w-full rounded-lg">BET</button>
+                <button onclick="setCookie(1); location.reload()" id="reset-btn" style="background-color: red"
+                    class="text-white font-bold p-3 w-full rounded-lg">RESET</button>
+            </div>
+
+            <div class="max-w-sm text-white my-4">
+                <h1 class="text-xl font-bold">How To Play</h1>
+                <p class="mt-2"><span id="rule2">Enter a valid numerical value into the text field.</span> <span
+                        id="rule1">The value must be less than or equal to your initial value</span></p>
+            </div>
+
+        </div>
+        <div class="relative mx-auto w-full">
+            <div
+                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; text-align: center;">
+                <h1 style="transition: cubic-bezier(0, 2.28, 0.95, 0.69) 0.5s;" id="multi-txt"
+                    class="text-white text-9xl font-bold text-center">1.00<span
+                        style="  color: transparent; text-shadow: 0 0 0 rgb(255, 255, 255);">✖</span></h1>
+
+                <div style="transition: cubic-bezier(0.22, 1, 0.36, 1) 0.5s;" id="loader-div" class="loader triangle">
+                    <svg viewBox="0 0 86 80">
+                        <polygon points="43 8 79 72 7 72"></polygon>
+                    </svg>
+
+                </div>
+                <p  style="transition: cubic-bezier(0, 2.28, 0.95, 0.69) 0.5s;" id="waiting-p" class="mt-4 text-white text-lg font-bold">Waiting to Start
+                </p>
+                
+               
+
+                <div id="stats-div">
+                    <p class="mt-4 text-white text-xl font-bold">Initial Value: <span id="initial-txt-span"></span>
+                        - Buy In Amount: <span id="buyin-txt-span"></span>
+                        - Multiplier: <span id="multi-txt-2"></span>
+                    </p>
+
+                    <p class="mt-4 text-white text-xl font-bold">New Balance:
+                        <span id="total-txt"></span></p>
+                </div>
+
+            </div>
+
+            <canvas style="transition: cubic-bezier(0.22, 1, 0.36, 1) 0.5s;" class="p-4 rounded-3xl"
+                id="myChart"></canvas>
+        </div>
+
+    </div>
+
+    <div class="" id="container"></div>
+
+    <script>
+      
+
+        
+
+
+        document.getElementById('amt-span').innerHTML = parseFloat(getCookie()).toFixed(2);
+
+        $('#initial-txt-span').html(parseInt(getCookie()).toFixed(2))
+        $('#multi-txt').hide()
+
+
+
+
+        window.onload = function getAmount() {
+            if (!getCookie("amt")) {
+                setCookie(1)
+            }
+        }
+
+        function getCookie() {
+            let name = "amt=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+
+            return "";
+        }
+
+        function setCookie(value) {
+            document.cookie = "amt=" + value;
+        }
+
+        let color1 = 'rgba(0, 191, 239, 1)';
+
+
+        // used for example purposes
+        let stopper = Math.floor(Math.random() * (60 - 1 + 1)) + 1;
+
+        // create initial empty chart
+        var ctx_live = document.getElementById("myChart");
+
+        var ctx = document.getElementById('myChart').getContext("2d");
+
+
+        var gradientFill = ctx.createLinearGradient(10, 0, 0, 500);
+        gradientFill.addColorStop(0, "rgb(75, 192, 192)");
+        gradientFill.addColorStop(1, "rgba(0, 191, 239, 0)");
+
+        var chartEl = document.getElementById("myChart");
+        chartEl.height = screen.height - 300;
+
+
+
+        var myChart = new Chart(ctx_live, {
+            type: 'line',
+            data: {
+                labels: ['0s'],
+                datasets: [{
+                    data: [1],
+                    fill: true,
+                    backgroundColor: gradientFill,
+                    borderColor: color1
+
+                }]
+            },
+
+
+
+            options: {
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'y',
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    },
+                    line: {
+                        tension: 10 // disables bezier curves
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 1.0,
+                        ticks: {
+                            stepSize: .2
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+                responsive: true,
+                animations: {
+                    tension: {
+                        duration: 100,
+                        from: 0,
+                        to: 0,
+                        loop: true
+                    }
+                },
+
+
+                legend: {
+                    display: false
+                },
+
+            }
+        });
+
+
+
+        // this post id drives the example data
+
+        var multiplier = 1.01;
+        var postId = 1;
+
+        var even = 0;
+
+        var lost = false;
+
+        $('#stats-div').hide()
+
+
+
+        // logic to get new data
+        var getData = function () {
+
+            if (multiplier % 1 == 0) {
+                changeTextColor()
+            }
+
+
+            $('#buyin-txt-span').html(parseFloat($('#buyinamt').val()))
+            if (!lost) {
+
+                $('#total-txt').html((parseFloat(getCookie()) + (parseFloat($('#buyinamt').val()) * multiplier))
+                    .toFixed(2))
+            } else {
+                $('#total-txt').html("1")
+
+            }
+
+
+            if (postId * 2 <= stopper) {
+                if (parseFloat($('#cashout').val()) > multiplier) {
+                    bar.animate(postId / 60, {
+                        duration: 300,
+
+                        // Easing for animation. See #easing section.
+                        // Default: 'linear'
+                        easing: 'easeInOut',
+                    });
+
+                    $('#bar').css({
+                        'width': postId + "%"
+                    })
+
+                    $('#multi-txt').html(multiplier.toFixed(2) +
+                        `<span style="color: transparent; text-shadow: 0 0 0 rgb(255, 255, 255);">✖</span>`)
+                    $('#multi-txt-2').html(multiplier.toFixed(2) +
+                        `<span style="color: transparent; text-shadow: 0 0 0 rgb(255, 255, 255);">✖</span>`)
+
+
+
+                    myChart.data.datasets[0].data.push((multiplier));
+
+
+
+                    if (even % 2 == 0) {
+                        bounceText()
+                        myChart.data.labels.push(postId++ + "s");
+                    } else {
+                        myChart.data.labels.push("");
+                    }
+                    even++;
+
+                    myChart.update();
+                    multiplier *= 1.05;
+
+                } else {
+                    $("#play-btn").click()
+                }
+
+
+            } else {
+                for (var i = 0; i < myChart.data.datasets[0].data.length; i++) {
+
+                    myChart.data.datasets[0].data[i] = 1
+                    myChart.update()
+                }
+
+                $('#multi-txt').css({
+                    'color': '#ff4d4d'
+                })
+
+                $('#multi-txt').text("You Lost")
+
+                lost = true
+                $('#stats-div').fadeIn()
+
+                bar.animate(1, {
+                    duration: 1000,
+
+                });
+            }
+        };
+
+        let interval;
+
+        let restart = false;
+
+        $('#multi-txt').css({
+            'transform': 'scale(0.4)'
+        })
+        $('#loader-div').css({
+            'transform': 'scale(1.5)'
+        })
+        $('#loader-div').css({
+            'opacity': 1
+        })
+
+        $('#waiting-p').css({
+            'transform': 'scale(1)'
+        })
+        $('#waiting-p').css({
+            'opacity': 1
+        })
+
+
+
+
+
+        $("#play-btn").click(function () {
+
+            if (interval == null) {
+                if ($('#buyinamt').val().length > 0 && parseInt(getCookie()) >= parseInt($('#buyinamt')
+                        .val())) {
+
+                    $('#loader-div').css({
+                        'transform': 'scale(2)'
+                    })
+
+                    setTimeout(function () {
+
+                        $('#loader-div').css({
+                            'transform': 'scale(.4)'
+                        })
+                        $('#loader-div').css({
+                            'opacity': 0
+                        })
+
+                    }, 200)
+
+
+
+                    $('#waiting-p').css({
+                        'transform': 'scale(.4)'
+                    })
+                    $('#waiting-p').css({
+                        'opacity': 0
+                    })
+
+
+                    setTimeout(function () {
+                        $('#play-btn').css({
+                            'background-color': '#ff4d4d'
+                        })
+                        $('#play-btn').html("Stop");
+                        $('#multi-txt').fadeIn()
+                        $('#waiting-p').css({
+                        'opacity': '0'
+                        })
+                        $('#multi-txt').css({
+                            'transform': 'scale(1.0)'
+                        })
+                        $('#waiting-p').css({
+                        'opacity': '0'
+                        })
+
+
+                            interval = setInterval(getData, 500);
+
+
+                    }, 1000)
+
+
+
+                } else if (parseInt(getCookie()) < parseInt($('#buyinamt').val())) {
+                    $('#rule1').css({
+                        'color': '#ff4d4d'
+                    });
+                    setTimeout(function () {
+                        $('#rule1').css({
+                            'color': '#fff'
+                        })
+                    }, 3000)
+                } else if ($('#buyinamt').val().length == 0) {
+                    $('#rule2').css({
+                        'color': '#ff4d4d'
+                    });
+                    setTimeout(function () {
+                        $('#rule2').css({
+                            'color': '#fff'
+                        })
+                    }, 3000)
+                }
+
+            } else if (!restart) {
+                clearInterval(interval);
+
+                $('#play-btn').css({
+                    'background-color': '#e6be49'
+                }, 300)
+                $('#play-btn').html("Restart");
+
+                setCookie(parseFloat(getCookie()) + (parseFloat($('#buyinamt').val()) * multiplier))
+
+                restart = true;
+                $('#stats-div').fadeIn()
+                if (lost) {
+                    setCookie(1)
+                }
+            } else {
+                location.reload()
+            }
+
+
+        })
+
+        $(document).keyup(function (e) {
+            if (e.key === "Escape") { // escape key maps to keycode `27`
+                clearInterval(interval);
+            }
+        })
+
+        function bounceText() {
+
+            document.getElementById('multi-txt').style.transform = "scale(1.1)";
+            setTimeout(() => {
+                document.getElementById('multi-txt').style.transform = "scale(1)";
+            }, 300)
+        }
+
+        function changeTextColor() {
+
+            document.getElementById('multi-txt').style.color = "#42ff81";
+            setTimeout(() => {
+                document.getElementById('multi-txt').style.color = "#fff";
+            }, 300)
+        }
+
+
+
+       
+    </script>
+
+    <style>
+        .loader {
+            --path: #fff;
+            --dot: rgba(0, 191, 239, 1);
+            --duration: 3s;
+            width: 44px;
+            height: 44px;
+            position: relative;
+        }
+
+        .loader:before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            position: absolute;
+            display: block;
+            background: var(--dot);
+            top: 37px;
+            left: 19px;
+            transform: translate(-18px, -18px);
+            -webkit-animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+            animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .loader svg rect,
+        .loader svg polygon,
+        .loader svg circle {
+            fill: none;
+            stroke: var(--path);
+            stroke-width: 10px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+
+        .loader svg polygon {
+            stroke-dasharray: 145 76 145 76;
+            stroke-dashoffset: 0;
+            -webkit-animation: pathTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+            animation: pathTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader svg rect {
+            stroke-dasharray: 192 64 192 64;
+            stroke-dashoffset: 0;
+            -webkit-animation: pathRect 3s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+            animation: pathRect 3s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader svg circle {
+            stroke-dasharray: 150 50 150 50;
+            stroke-dashoffset: 75;
+            -webkit-animation: pathCircle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+            animation: pathCircle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader.triangle {
+            width: 48px;
+        }
+
+        .loader.triangle:before {
+            left: 21px;
+            transform: translate(-10px, -18px);
+            -webkit-animation: dotTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+            animation: dotTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        @-webkit-keyframes pathTriangle {
+            33% {
+                stroke-dashoffset: 74;
+            }
+
+            66% {
+                stroke-dashoffset: 147;
+            }
+
+            100% {
+                stroke-dashoffset: 221;
+            }
+        }
+
+        @keyframes pathTriangle {
+            33% {
+                stroke-dashoffset: 74;
+            }
+
+            66% {
+                stroke-dashoffset: 147;
+            }
+
+            100% {
+                stroke-dashoffset: 221;
+            }
+        }
+
+        @-webkit-keyframes dotTriangle {
+            33% {
+                transform: translate(0, 0);
+            }
+
+            66% {
+                transform: translate(10px, -18px);
+            }
+
+            100% {
+                transform: translate(-10px, -18px);
+            }
+        }
+
+        @keyframes dotTriangle {
+            33% {
+                transform: translate(0, 0);
+            }
+
+            66% {
+                transform: translate(10px, -18px);
+            }
+
+            100% {
+                transform: translate(-10px, -18px);
+            }
+        }
+
+        @-webkit-keyframes pathRect {
+            25% {
+                stroke-dashoffset: 64;
+            }
+
+            50% {
+                stroke-dashoffset: 128;
+            }
+
+            75% {
+                stroke-dashoffset: 192;
+            }
+
+            100% {
+                stroke-dashoffset: 256;
+            }
+        }
+
+        @keyframes pathRect {
+            25% {
+                stroke-dashoffset: 64;
+            }
+
+            50% {
+                stroke-dashoffset: 128;
+            }
+
+            75% {
+                stroke-dashoffset: 192;
+            }
+
+            100% {
+                stroke-dashoffset: 256;
+            }
+        }
+
+        @-webkit-keyframes dotRect {
+            25% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(18px, -18px);
+            }
+
+            75% {
+                transform: translate(0, -36px);
+            }
+
+            100% {
+                transform: translate(-18px, -18px);
+            }
+        }
+
+        @keyframes dotRect {
+            25% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(18px, -18px);
+            }
+
+            75% {
+                transform: translate(0, -36px);
+            }
+
+            100% {
+                transform: translate(-18px, -18px);
+            }
+        }
+
+        @-webkit-keyframes pathCircle {
+            25% {
+                stroke-dashoffset: 125;
+            }
+
+            50% {
+                stroke-dashoffset: 175;
+            }
+
+            75% {
+                stroke-dashoffset: 225;
+            }
+
+            100% {
+                stroke-dashoffset: 275;
+            }
+        }
+
+        @keyframes pathCircle {
+            25% {
+                stroke-dashoffset: 125;
+            }
+
+            50% {
+                stroke-dashoffset: 175;
+            }
+
+            75% {
+                stroke-dashoffset: 225;
+            }
+
+            100% {
+                stroke-dashoffset: 275;
+            }
+        }
+
+        .loader {
+            display: inline-block;
+            margin: 0 16px;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+
+</body>
+
+</html>
