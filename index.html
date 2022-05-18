@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--Head is responsible for all the imports of the program-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +16,18 @@
 
 </head>
 
+
+<!--Body is responsible for holding all the viewable elements on the page-->
+<!--Elements are all the individual viewable things. Example: <h1>Hello World</h1> -->
+<!--h1 - header-->
+<!--div - container-->
+<!--p - paragraph-->
+<!--input - text / number input-->
+<!--canvas - holds bundles of elements - For this project it holds the chart element -->
+<!--script - holds javascript code-->
+<!--style - holds css code-->
 <body style="background-color: #0d0d20" class="p-10 overflow-hidden">
+    
     <div class="flex space-x-10">
         <div class="amt">
             <div class="flex justify-between">
@@ -81,12 +93,12 @@
                         </svg>
                     </div>
 
-                    <input id="cashout" class="bg-white p-3 rounded-tr-lg rounded-br-lg w-full"
+                    <input type="number" min="2"  id="cashout" class="bg-white p-3 rounded-tr-lg rounded-br-lg w-full"
                         placeholder="Auto Cashout">
                 </div>
 
 
-                <button id="play-btn" class="text-white font-bold p-3 w-full rounded-lg">BET</button>
+                <button id="play-btn" class="text-white w-full font-bold p-3 rounded-lg">BET</button>
                 <button onclick="setCookie(1); location.reload()" id="reset-btn" style="background-color: red"
                     class="text-white font-bold p-3 w-full rounded-lg">RESET</button>
             </div>
@@ -140,9 +152,15 @@
     <div class="" id="container"></div>
 
     <script>
+
+        // Sets the amt-span element to the value to the stored cookie value of the score : float type
         document.getElementById('amt-span').innerHTML = parseFloat(getCookie()).toFixed(2);
 
+
+        // When the page loads it sets the elements text to the cookie value of the score : float type
         $('#initial-txt-span').html(parseInt(getCookie()).toFixed(2))
+        
+        // Hides the text when the page loads
         $('#multi-txt').hide()
 
 
@@ -150,13 +168,19 @@
 
 
 
+        /* When the page loads this function checks if the score value saved in the browser as a cookie 
+          is not null
+          If it is it will set the score to 1
+        */
 
+        
         window.onload = function getAmount() {
             if (!getCookie("amt")) {
                 setCookie(1)
             }
         }
 
+        // This function is responsible for getting the browser stored cookie : returns a string
         function getCookie() {
             let name = "amt=";
             let decodedCookie = decodeURIComponent(document.cookie);
@@ -174,6 +198,7 @@
             return "";
         }
 
+        // This function is responsible for setting the browser stored data
         function setCookie(value) {
             document.cookie = "amt=" + value;
         }
@@ -181,24 +206,24 @@
         let color1 = 'rgba(0, 191, 239, 1)';
 
 
-        // used for example purposes
+        //tells the program when to stop the multiplier and "crash"
         let stopper = Math.floor(Math.random() * (60 - 1 + 1)) + 1;
 
         // create initial empty chart
-        var ctx_live = document.getElementById("myChart");
-
-        var ctx = document.getElementById('myChart').getContext("2d");
+        var ctx_live = document.getElementById("myChart").getContext("2d");
 
 
-        var gradientFill = ctx.createLinearGradient(10, 0, 0, 500);
+        // creates a gradient so the chart will look nice
+        var gradientFill = ctx_live.createLinearGradient(10, 0, 0, 500);
         gradientFill.addColorStop(0, "rgb(75, 192, 192)");
         gradientFill.addColorStop(1, "rgba(0, 191, 239, 0)");
 
         var chartEl = document.getElementById("myChart");
+        // makes chart taller
         chartEl.height = screen.height - 300;
 
 
-
+        // responsible for creating chart and applying settings to style it
         var myChart = new Chart(ctx_live, {
             type: 'line',
             data: {
@@ -260,10 +285,11 @@
 
 
 
-        // this post id drives the example data
 
         var multiplier = 1.01;
-        var postId = 1;
+        
+        //iterations of getData function
+        var iters = 1;
 
         var even = 0;
 
@@ -273,7 +299,7 @@
 
 
 
-        // logic to get new data
+        // logic to set elements with respective data such as text, color, and values 
         var getData = function () {
 
             if (multiplier % 1 == 0) {
@@ -294,12 +320,12 @@
             }
 
 
-            if (postId * 2 <= stopper) {
+            if (iters * 2 <= stopper) {
                 if (parseFloat($('#cashout').val()) > multiplier || ($('#cashout').val()) == "") {
 
 
                     $('#bar').css({
-                        'width': postId + "%"
+                        'width': iters + "%"
                     })
 
                     $('#multi-txt').html(multiplier.toFixed(2) +
@@ -316,8 +342,16 @@
 
 
                     if (even % 2 == 0) {
+
+                        var myAudioElement = new Audio()
+
+                        myAudioElement.addEventListener("canplaythrough", event => {
+                        /* the audio is now playable; play it if permissions allow */
+                        myAudioElement.play();
+                        });
+
                         bounceText()
-                        myChart.data.labels.push(postId++ + "s");
+                        myChart.data.labels.push(iters++ + "s");
                     } else {
                         myChart.data.labels.push("");
                     }
@@ -326,7 +360,7 @@
                     even++;
 
                     myChart.update();
-                    multiplier *= 1.05;
+                    multiplier *= 1.02;
 
                 } else {
                     $("#play-btn").click()
@@ -376,9 +410,10 @@
 
 
 
-
+        //checks if play button is clicked
 
         $("#play-btn").click(function () {
+
 
 
             if (interval == null) {
@@ -409,6 +444,8 @@
                         'opacity': 0
                     })
 
+                    // runs logic after 1000ms
+                    // created a one second delay until game starts
 
                     setTimeout(function () {
                         $('#play-btn').css({
@@ -426,7 +463,8 @@
                             'opacity': '0'
                         })
 
-
+                        //starts game
+                        //creates an interval that runs every 500ms
                         interval = setInterval(getData, 500);
 
 
@@ -482,12 +520,14 @@
 
         })
 
+        //if the escape key is pressed the game stops
         $(document).keyup(function (e) {
             if (e.key === "Escape") { // escape key maps to keycode `27`
                 clearInterval(interval);
             }
         })
 
+        //animates the multiplier text in the middle to bounce
         function bounceText() {
 
             document.getElementById('multi-txt').style.transform = "scale(1.1)";
@@ -496,6 +536,7 @@
             }, 300)
         }
 
+        //changes the multiplier text to green for a 300ms - may not implement 
         function changeTextColor() {
 
             document.getElementById('multi-txt').style.color = "#42ff81";
@@ -505,6 +546,7 @@
         }
     </script>
 
+    <!--Styles to make certain elements look good-->
     <style>
         #play-btn {
             background-color: rgba(0, 191, 239, 1);
@@ -614,6 +656,8 @@
         html {
             -webkit-font-smoothing: antialiased;
         }
+
+
     </style>
 
 </body>
